@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://bouokiwnpuu88"]
+
+[ext_resource type="Script" uid="uid://jw1fbg5a7cmq" path="res://scenes/lose_wind.gd" id="1_ajdf8"]
+[ext_resource type="Texture2D" uid="uid://cy80vrfivbhg" path="res://assets/Sprites/97833d3d-cdbc-499f-a94f-040b25ac6868.png" id="1_eemph"]
+[ext_resource type="StyleBox" uid="uid://lv1vq17lww2o" path="res://assets/ui/new_style_box_flat.tres" id="2_ajdf8"]
+[ext_resource type="AudioStream" uid="uid://ct40unh3f12ap" path="res://assets/Player/dark-horror-opener-440150.mp3" id="4_usbuc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_usbuc"]
+texture = ExtResource("1_eemph")
+modulate_color = Color(0.27022192, 0.27022192, 0.2702219, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_stsr7"]
+font_size = 300
+font_color = Color(1, 0.14509805, 0, 1)
+outline_size = 30
+outline_color = Color(0.5267932, 1.2153015e-06, 3.85046e-07, 1)
+
+[node name="lose_wind" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ajdf8")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_usbuc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 98.0
+offset_right = 1329.0
+offset_bottom = 507.0
+text = "LOSS"
+label_settings = SubResource("LabelSettings_stsr7")
+
+[node name="reset" type="Button" parent="."]
+layout_mode = 0
+offset_left = 711.0
+offset_top = 580.0
+offset_right = 1242.0
+offset_bottom = 720.0
+theme_override_font_sizes/font_size = 96
+theme_override_styles/normal = ExtResource("2_ajdf8")
+theme_override_styles/pressed = ExtResource("2_ajdf8")
+theme_override_styles/hover = ExtResource("2_ajdf8")
+text = "Main Menu"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_usbuc")
+volume_db = -10.326
+autoplay = true
+stream_paused = true
+
+[connection signal="pressed" from="reset" to="." method="_on_reset_pressed"]

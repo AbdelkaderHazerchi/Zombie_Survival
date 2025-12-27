@@ -1,0 +1,139 @@
+[gd_scene load_steps=14 format=3 uid="uid://4thnnci3f4sx"]
+
+[ext_resource type="Script" uid="uid://cv1aktr1bxq3m" path="res://scenes/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://cy80vrfivbhg" path="res://assets/Sprites/97833d3d-cdbc-499f-a94f-040b25ac6868.png" id="2_ekxnf"]
+[ext_resource type="AudioStream" uid="uid://ct40unh3f12ap" path="res://assets/Player/dark-horror-opener-440150.mp3" id="3_bqqt6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bqqt6"]
+texture = ExtResource("2_ekxnf")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
+bg_color = Color(0.08711559, 0.4033084, 0.06832069, 1)
+border_color = Color(0, 0.30588236, 0, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 40
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 40
+corner_detail = 20
+shadow_color = Color(1.9177095e-08, 0.07813416, 0, 1)
+shadow_size = 14
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.15142295, 0.6552285, 0.120474555, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 40
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0.078431375, 0, 1)
+shadow_size = 15
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vue75"]
+bg_color = Color(0.08627451, 0.40392157, 0.06666667, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 40
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0.078431375, 0, 1)
+shadow_size = 20
+shadow_offset = Vector2(6, 6)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wu84c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
+bg_color = Color(0.6122994, 7.70092e-07, 4.3317675e-07, 1)
+border_color = Color(0, 0.30588236, 0, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 40
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 40
+corner_detail = 20
+shadow_color = Color(0.14509805, 0, 0, 1)
+shadow_size = 14
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.6117647, 0, 0, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 40
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 40
+shadow_color = Color(0.14509805, 0, 0, 1)
+shadow_size = 15
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ln24"]
+bg_color = Color(0.6117647, 0, 0, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 40
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 40
+shadow_color = Color(0.14509805, 0, 0, 1)
+shadow_size = 20
+shadow_offset = Vector2(6, 6)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rtw2f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wu84c"]
+font_size = 41
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_bqqt6")
+
+[node name="start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 424.0
+offset_right = 681.0
+offset_bottom = 550.0
+theme_override_font_sizes/font_size = 86
+theme_override_styles/normal = SubResource("StyleBoxFlat_ekxnf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vue75")
+text = "START"
+icon = SubResource("ViewportTexture_wu84c")
+
+[node name="exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 413.0
+offset_top = 601.0
+offset_right = 681.0
+offset_bottom = 727.0
+theme_override_font_sizes/font_size = 86
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wu84c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8ln24")
+text = "EXIT"
+icon = SubResource("ViewportTexture_rtw2f")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1535.0
+offset_top = 1014.0
+offset_right = 1915.0
+offset_bottom = 1071.0
+text = "By: Abdelkader.dev"
+label_settings = SubResource("LabelSettings_wu84c")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bqqt6")
+volume_db = -10.326
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_start_2_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
