@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv6bal865q0vx"]
+
+[ext_resource type="Script" uid="uid://dvs2b5jf5o12f" path="res://assets/Player/bullet.gd" id="1_75dqj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4046"]
+albedo_color = Color(0.9764706, 0.7921569, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_75dqj"]
+size = Vector3(0.05, 0.05, 0.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_75dqj"]
+radius = 0.041503906
+height = 0.51220703
+
+[node name="bullet" type="Area3D" groups=["bullet"]]
+script = ExtResource("1_75dqj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_o4046")
+mesh = SubResource("BoxMesh_75dqj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 9.1552734e-05, -0.00030517558, -0.004983902)
+shape = SubResource("CapsuleShape3D_75dqj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

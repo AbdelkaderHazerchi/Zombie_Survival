@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://0ykqwntuhovf"]
+
+[ext_resource type="Script" uid="uid://hm3ch8g2casb" path="res://assets/Zombie/pluse_health.gd" id="1_pcll7"]
+[ext_resource type="AudioStream" uid="uid://byhkjqgh4hy38" path="res://assets/Player/get_item_2.mp3" id="2_6ps6q"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dlf7c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pcll7"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ps6q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxh08"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rwesd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xlxtm"]
+size = Vector3(0.46581268, 0.9020996, 1.2380676)
+
+[node name="pluse_health" type="Area3D"]
+script = ExtResource("1_pcll7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.28284904, 0, 0, 0, 0.73645866, 0, 0, 0, 1.1062918, 0, 0.36807296, 0)
+mesh = SubResource("BoxMesh_dlf7c")
+
+[node name="p1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.31294167, 0, 0, 0, 0.113131166, 0, 0, 0, 0.28221068, 0, 0.35046557, 0.00438118)
+material_override = SubResource("StandardMaterial3D_pcll7")
+mesh = SubResource("BoxMesh_6ps6q")
+
+[node name="p2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.31294167, 0, 0, 0, -4.9451203e-09, -0.4689302, 0, 0.113131166, -2.049759e-08, 0, 0.35046557, 0.14567447)
+material_override = SubResource("StandardMaterial3D_sxh08")
+mesh = SubResource("BoxMesh_6ps6q")
+
+[node name="p3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.31294167, 0, 0, 0, -4.9451203e-09, -0.4689302, 0, 0.113131166, -2.049759e-08, 0, 0.35046557, -0.15109521)
+material_override = SubResource("StandardMaterial3D_sxh08")
+mesh = SubResource("BoxMesh_6ps6q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.09964126, 0, 0, 0, 0.06608826, 0, 0, 0, 0.51541317, 0, 0.8581059, 0)
+mesh = SubResource("BoxMesh_rwesd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.09964126, 0, 0, 0, -2.8888096e-09, -0.16888607, 0, 0.06608826, -7.3822446e-09, 0, 0.77638155, -0.22465761)
+mesh = SubResource("BoxMesh_rwesd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.09964126, 0, 0, 0, -2.8888096e-09, -0.16888607, 0, 0.06608826, -7.3822446e-09, 0, 0.77638155, 0.22445937)
+mesh = SubResource("BoxMesh_rwesd")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20420134, 0.32408726, 0)
+light_color = Color(1, 0.60701716, 0.54817975, 1)
+light_energy = 0.628
+omni_range = 0.5348784
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20385075, 0.32408726, 0)
+light_color = Color(1, 0.60701716, 0.54817975, 1)
+light_energy = 0.628
+omni_range = 0.5348784
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.3599143, 0, 0, 0, 1, 0, 0, 0, 1.1010082, -0.006340744, 0.44592285, -0.005203247)
+shape = SubResource("BoxShape3D_xlxtm")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_6ps6q")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

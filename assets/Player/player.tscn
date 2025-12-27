@@ -1,0 +1,220 @@
+[gd_scene load_steps=19 format=3 uid="uid://cskju0pt657d8"]
+
+[ext_resource type="Script" uid="uid://c5s3ce7i5vn4e" path="res://assets/Player/player.gd" id="1_xg5j1"]
+[ext_resource type="PackedScene" uid="uid://boopupqaj83ke" path="res://assets/Player/gun.tscn" id="2_qm3y6"]
+[ext_resource type="Texture2D" uid="uid://clvce2bdi01a5" path="res://assets/Sprites/crosshair.png" id="3_7gujn"]
+[ext_resource type="AudioStream" uid="uid://dkshchpslv5sc" path="res://assets/Player/reload_gun.mp3" id="4_hvr4l"]
+[ext_resource type="AudioStream" uid="uid://doqwjtwgsbxv6" path="res://assets/Player/gun_shot.mp3" id="5_cr3b8"]
+[ext_resource type="AudioStream" uid="uid://vx11nunafpdh" path="res://assets/Player/walking_in_grass.wav" id="6_kwwki"]
+[ext_resource type="AudioStream" uid="uid://ke77berkhuym" path="res://assets/Player/player_damage.wav" id="7_6gjsn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_is41o"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xg5j1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qm3y6"]
+font_size = 80
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gjsn"]
+font_size = 117
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7gujn"]
+font_size = 100
+font_color = Color(1, 0.43481088, 0.36613947, 1)
+outline_size = 15
+outline_color = Color(0.33331102, 5.5952e-07, 1.2032687e-07, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hvr4l"]
+font_size = 80
+font_color = Color(0.21015364, 0.81464905, 0, 1)
+outline_size = 15
+outline_color = Color(0, 0.12156863, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cr3b8"]
+font_size = 80
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kwwki"]
+font_size = 22
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_hvr4l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.05602766, 0.021339536, -0.0020176172)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gun:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.425, -0.325, -0.68)]
+}
+
+[sub_resource type="Animation" id="Animation_7gujn"]
+resource_name = "walk"
+length = 1.6
+loop_mode = 1
+step = 0.0666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1.0000007, 1.0000004),
+"update": 0,
+"values": [Vector3(7.450581e-09, 0.021339536, -0.0020176172), Vector3(0, -0.055, -0.002), Vector3(0, 0.06, -0.002), Vector3(7.450581e-09, 0.021339536, -0.0020176172)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gun:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.425, -0.325, -0.68), Vector3(0.425, -0.32, -0.68), Vector3(0.425, -0.3569802, -0.68), Vector3(0.425, -0.325, -0.68)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cr3b8"]
+_data = {
+&"RESET": SubResource("Animation_hvr4l"),
+&"walk": SubResource("Animation_7gujn")
+}
+
+[node name="player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_xg5j1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_is41o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_xg5j1")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.679, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05602766, 0.021339536, -0.0020176172)
+current = true
+
+[node name="gun" parent="head/Camera3D" instance=ExtResource("2_qm3y6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425, -0.325, -0.68)
+
+[node name="Label" type="Label" parent="head/Camera3D"]
+offset_left = 1762.0
+offset_top = 915.0
+offset_right = 1853.0
+offset_bottom = 1025.0
+text = "90"
+label_settings = SubResource("LabelSettings_qm3y6")
+
+[node name="Label5" type="Label" parent="head/Camera3D"]
+offset_left = 1578.0
+offset_top = 917.0
+offset_right = 1757.0
+offset_bottom = 1078.0
+text = "30/"
+label_settings = SubResource("LabelSettings_6gjsn")
+
+[node name="Label2" type="Label" parent="head/Camera3D"]
+offset_left = 11.0
+offset_top = 953.0
+offset_right = 457.0
+offset_bottom = 1114.0
+text = "100%"
+label_settings = SubResource("LabelSettings_7gujn")
+
+[node name="Label3" type="Label" parent="head/Camera3D"]
+offset_left = 810.0
+offset_top = -2.0
+offset_right = 1106.0
+offset_bottom = 108.0
+text = "score: 0"
+label_settings = SubResource("LabelSettings_hvr4l")
+
+[node name="TextureRect" type="TextureRect" parent="head/Camera3D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_7gujn")
+stretch_mode = 2
+
+[node name="time" type="Label" parent="head/Camera3D"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_right = -21.0
+offset_bottom = 110.0
+grow_horizontal = 0
+text = "0 : 0"
+label_settings = SubResource("LabelSettings_cr3b8")
+
+[node name="Label4" type="Label" parent="head/Camera3D"]
+offset_left = 8.0
+offset_top = -2.0
+offset_right = 175.0
+offset_bottom = 131.0
+text = "PUASE: P
+RELOAD GUN: R
+SPEED: SHIFT"
+label_settings = SubResource("LabelSettings_kwwki")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="head/Camera3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_cr3b8")
+}
+
+[node name="reload" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_hvr4l")
+unit_size = 100.0
+
+[node name="shooting" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_cr3b8")
+
+[node name="walking" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_kwwki")
+
+[node name="damage" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_6gjsn")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

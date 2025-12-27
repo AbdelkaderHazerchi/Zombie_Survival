@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp8f5psfhl77a"]
+
+[ext_resource type="Script" uid="uid://b7wo207cpxmes" path="res://assets/Player/gun_bullets.gd" id="1_vpwo4"]
+[ext_resource type="AudioStream" uid="uid://byhkjqgh4hy38" path="res://assets/Player/get_item_2.mp3" id="2_tcarx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4cu3"]
+albedo_color = Color(0.85490197, 0.74509805, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vpwo4"]
+material = SubResource("StandardMaterial3D_t4cu3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tcarx"]
+size = Vector3(0.2944126, 0.18896484, 0.5253906)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5jek2"]
+albedo_color = Color(0.21568628, 0.4862745, 0.35686275, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_emtpy"]
+material = SubResource("StandardMaterial3D_5jek2")
+
+[node name="gun_bullets" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.003917277, 0)
+script = ExtResource("1_vpwo4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2474727, 0, 0, 0, 0.09323245, 0, 0, 0, 0.45805928, 0, 0.055230558, 0)
+mesh = SubResource("BoxMesh_vpwo4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0003786087, 0.010009766, 0)
+shape = SubResource("BoxShape3D_tcarx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2916434, 0, 0, 0, 0.16705783, 0, 0, 0, 0.5223635, 0, 0, 0)
+mesh = SubResource("BoxMesh_emtpy")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19623673, 7.0631504e-05)
+light_color = Color(1, 1, 0.5921569, 1)
+light_energy = 4.341
+light_size = 0.016
+shadow_enabled = true
+shadow_bias = 10.0
+omni_range = 0.41118142
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_tcarx")
+max_db = 6.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
